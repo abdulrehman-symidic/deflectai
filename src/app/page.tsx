@@ -1,69 +1,172 @@
-import Image from "next/image";
+import Link from "next/link";
+import { hasSupabaseEnv } from "@/lib/env";
 
-export default function Home() {
+const FEATURES = [
+  {
+    title: "Order tracking, answered instantly",
+    body: "The AI looks up order status by number + email against your orders, then replies with carrier, tracking number and fulfilment status.",
+  },
+  {
+    title: "Return & shipping policy Q&A",
+    body: "Drop in your policy text once. DeflectAI answers every WISMO and return question in your own words, using your brand colour.",
+  },
+  {
+    title: "One-line installation",
+    body: "Paste a single script tag into your Shopify theme. No app review, no rebuild, works on any theme.",
+  },
+  {
+    title: "Deflection analytics",
+    body: "See every conversation, and how many repetitive tickets were resolved before a human ever got involved.",
+  },
+];
+
+const STEPS = [
+  {
+    step: "01",
+    title: "Create your store",
+    body: "Sign up and add your store name, domain and policies.",
+  },
+  {
+    step: "02",
+    title: "Paste the snippet",
+    body: "Add the widget script tag before </body> in theme.liquid.",
+  },
+  {
+    step: "03",
+    title: "Watch tickets disappear",
+    body: "Shoppers self-serve order status and policy answers around the clock.",
+  },
+];
+
+export default function LandingPage() {
+  const configured = hasSupabaseEnv();
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <div className="relative min-h-screen overflow-hidden">
+      <div className="pointer-events-none absolute inset-0 grid-bg opacity-40" />
+      <div className="pointer-events-none absolute -top-40 left-1/2 h-[36rem] w-[36rem] -translate-x-1/2 rounded-full bg-indigo-600/20 blur-[120px]" />
+
+      <div className="relative mx-auto max-w-6xl px-6">
+        <header className="flex items-center justify-between py-6">
+          <div className="flex items-center gap-2 text-lg font-semibold">
+            <span className="grid h-8 w-8 place-items-center rounded-lg bg-indigo-600 text-sm font-bold">
+              D
+            </span>
+            DeflectAI
+          </div>
+          <nav className="flex items-center gap-3 text-sm">
+            <Link
+              href="/login"
+              className="rounded-lg px-4 py-2 text-slate-300 transition hover:text-white"
+            >
+              Sign in
+            </Link>
+            <Link
+              href="/signup"
+              className="rounded-lg bg-indigo-600 px-4 py-2 font-medium text-white transition hover:bg-indigo-500"
+            >
+              Start free
+            </Link>
+          </nav>
+        </header>
+
+        <section className="py-20 text-center sm:py-28">
+          <span className="inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-1 text-xs font-medium text-indigo-300">
+            <span className="h-1.5 w-1.5 rounded-full bg-indigo-400" />
+            Powered by GPT-4o mini
+          </span>
+          <h1 className="mx-auto mt-6 max-w-3xl text-4xl font-bold tracking-tight text-white sm:text-6xl">
+            Deflect 60–70% of your
+            <span className="bg-gradient-to-r from-indigo-400 to-sky-400 bg-clip-text text-transparent">
+              {" "}
+              repetitive support{" "}
+            </span>
+            tickets
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p className="mx-auto mt-6 max-w-2xl text-lg text-slate-400">
+            DeflectAI drops an AI chat widget onto your Shopify store that
+            instantly resolves &ldquo;where is my order?&rdquo; and return-policy
+            questions — no support team required.
           </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
+          <div className="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
+            <Link
+              href="/signup"
+              className="w-full rounded-xl bg-indigo-600 px-6 py-3 font-medium text-white transition hover:bg-indigo-500 sm:w-auto"
+            >
+              Create your free widget
+            </Link>
+            <Link
+              href="/login"
+              className="w-full rounded-xl border border-slate-700 bg-slate-900/60 px-6 py-3 font-medium text-slate-200 transition hover:border-slate-500 sm:w-auto"
+            >
+              I already have an account
+            </Link>
+          </div>
+
+          {!configured && (
+            <p className="mx-auto mt-8 max-w-xl rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-300">
+              Heads up: Supabase env vars are not set yet. Add them to{" "}
+              <code className="font-mono">.env.local</code> (see{" "}
+              <code className="font-mono">.env.example</code>) to enable
+              sign-up.
+            </p>
+          )}
+        </section>
+
+        <section className="grid gap-4 sm:grid-cols-2">
+          {FEATURES.map((feature) => (
+            <div
+              key={feature.title}
+              className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6"
+            >
+              <h3 className="font-semibold text-white">{feature.title}</h3>
+              <p className="mt-2 text-sm leading-relaxed text-slate-400">
+                {feature.body}
+              </p>
+            </div>
+          ))}
+        </section>
+
+        <section className="py-24">
+          <h2 className="text-center text-3xl font-bold text-white">
+            Live in under five minutes
+          </h2>
+          <div className="mt-12 grid gap-6 sm:grid-cols-3">
+            {STEPS.map((item) => (
+              <div key={item.step} className="relative">
+                <div className="font-mono text-sm text-indigo-400">
+                  {item.step}
+                </div>
+                <h3 className="mt-2 font-semibold text-white">{item.title}</h3>
+                <p className="mt-2 text-sm text-slate-400">{item.body}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section className="pb-24">
+          <div className="rounded-3xl border border-slate-800 bg-gradient-to-b from-slate-900 to-slate-950 p-10 text-center">
+            <h2 className="text-3xl font-bold text-white">
+              Stop paying humans to copy-paste tracking links
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-slate-400">
+              Free while you evaluate. Connect your store, install the widget,
+              and measure the deflection.
+            </p>
+            <Link
+              href="/signup"
+              className="mt-8 inline-block rounded-xl bg-indigo-600 px-6 py-3 font-medium text-white transition hover:bg-indigo-500"
+            >
+              Get started
+            </Link>
+          </div>
+        </section>
+
+        <footer className="flex flex-col items-center justify-between gap-3 border-t border-slate-800 py-8 text-sm text-slate-500 sm:flex-row">
+          <span>© DeflectAI</span>
+          <span>Built with Next.js, Supabase &amp; OpenAI</span>
+        </footer>
+      </div>
     </div>
   );
 }

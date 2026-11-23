@@ -133,7 +133,7 @@ deflectai/
 
 ### 1. Clone & Install Dependencies
 ```bash
-git clone https://github.com/abdulrehmanbala117-creator/deflectai.git
+git clone https://github.com/abdulrehman-symidic/deflectai.git
 cd deflectai
 npm install
 ```
